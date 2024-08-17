@@ -125,8 +125,15 @@ Email editors allow for editing in multiple formats, including plain text, rich 
 - Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.
 
 ```mermaid
-
-
+classDiagram
+    class Singleton {
+        -static instance: Singleton
+        -Singleton()
+        +static getInstance(): Singleton
+        +someMethod(): void
+    }
+    
+    Singleton --> Singleton : access instance via getInstance()
 ```
 
 ### Use when
