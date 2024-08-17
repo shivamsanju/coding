@@ -1,2 +1,143 @@
-# Design Patterns
-This folder contains resources and notes related to the topic: **Design Patterns**.
+#  Design Patterns
+
+## 🚀 Factory Design Pattern
+
+### Purpose
+- Factory design pattern is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created. 
+- Exposes a method for creating objects, allowing subclasses to control the actual creation process.
+
+```mermaid
+classDiagram
+    class Product {
+        <<interface>>
+        +operation()
+    }
+
+    class ConcreteProductA {
+        +operation()
+    }
+
+    class ConcreteProductB {
+        +operation()
+    }
+
+    class Creator {
+        <<abstract>>
+        +createProduct() : Product
+        +someOperation()
+    }
+
+    class ConcreteCreatorA {
+        +createProduct() : ConcreteProductA
+    }
+
+    class ConcreteCreatorB {
+        +createProduct() : ConcreteProductB
+    }
+
+    Product <|.. ConcreteProductA
+    Product <|.. ConcreteProductB
+    Creator <|-- ConcreteCreatorA
+    Creator <|-- ConcreteCreatorB
+    Creator o-- Product
+```
+
+### Use when
+- A class will not know what classes it will be required to create.
+- Subclasses may specify what objects should be created. 
+- Parent classes wish to defer creation to their subclasses.
+- Useful for frequent code changes
+
+### Example
+Many applications have some form of user and group structure for security. When the application needs to create a user it will typically delegate the creation of the user to multiple user implementations. The parent user object will handle most operations for each user but the subclasses will define the factory method that handles the distinctions in the creation of each type of user. A system may have AdminUser and StandardUser objects each of which extend the User object. The AdminUser object may perform some extra tasks to ensure access while the StandardUser may do the same to limit access.
+
+
+## 🚀 Abstract Factory Design Pattern
+
+### Purpose
+- Provide an interface that delegates creation calls to one or more concrete classes in order to deliver specific objects.
+
+```mermaid
+classDiagram
+    class AbstractFactory {
+        <<interface>>
+        +createProductA() : AbstractProductA
+        +createProductB() : AbstractProductB
+    }
+
+    class ConcreteFactory1 {
+        +createProductA() : ProductA1
+        +createProductB() : ProductB1
+    }
+
+    class ConcreteFactory2 {
+        +createProductA() : ProductA2
+        +createProductB() : ProductB2
+    }
+
+    class AbstractProductA {
+        <<interface>>
+    }
+
+    class AbstractProductB {
+        <<interface>>
+    }
+
+    class ProductA1 {
+    }
+
+    class ProductA2 {
+    }
+
+    class ProductB1 {
+    }
+
+    class ProductB2 {
+    }
+
+    AbstractFactory <|.. ConcreteFactory1
+    AbstractFactory <|.. ConcreteFactory2
+    AbstractProductA <|.. ProductA1
+    AbstractProductA <|.. ProductA2
+    AbstractProductB <|.. ProductB1
+    AbstractProductB <|.. ProductB2
+    ConcreteFactory1 --> ProductA1
+    ConcreteFactory1 --> ProductB1
+    ConcreteFactory2 --> ProductA2
+    ConcreteFactory2 --> ProductB2
+
+```
+
+### Use when
+- The creation of objects should be independent of the system utilizing them.
+- Systems should be capable of using multiple families of objects.
+- Families of objects must be used together.
+- Libraries must be published without exposing implementation details.
+- Concrete classes should be decoupled from clients.
+
+### Example
+Email editors allow for editing in multiple formats, including plain text, rich text, and HTML. Depending on the format, different objects are required: for plain text, a body object represents the text, and an attachment object encrypts attachments into Base64. For HTML, the body object represents HTML-encoded text, and the attachment object enables both inline representation and standard attachments. By using an abstract factory for creation, we ensure that the appropriate object sets are generated based on the email style being sent.
+
+
+## 🚀 Singleton Design Pattern
+
+### Purpose
+- Singleton is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.
+
+```mermaid
+
+
+```
+
+### Use when
+- Exactly one instance of a class is required.
+- Controlled access to a single object is necessary. 
+
+### Example
+Most languages provide some sort of system or environment object that allows the language to interact with the native operating system. Since the application is physically running on only one operating system there is only ever a need for a single instance of this system object. The singleton pattern would be implemented by the language runtime to ensure that only a single copy of the system object is created and to ensure only appropriate processes are allowed access to it. 
+
+Database Connections: Only one instance of a connection should be used to manage interactions with the database.
+
+Logging: A single instance of a logger can be used to ensure that all parts of an application log information to the same place.
+
+Configuration Management: A single instance can manage the configuration settings of an application.
