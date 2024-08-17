@@ -148,3 +148,92 @@ Database Connections: Only one instance of a connection should be used to manage
 Logging: A single instance of a logger can be used to ensure that all parts of an application log information to the same place.
 
 Configuration Management: A single instance can manage the configuration settings of an application.
+
+
+## 🚀 Prototype Design Pattern
+
+### Purpose
+- The Prototype Pattern is a creational design pattern used to create new objects by copying an existing object, known as the prototype. This pattern is particularly useful when the cost of creating a new object from scratch is more expensive than copying an existing object. It allows for the creation of new instances based on an existing instance, which can be more efficient.
+
+
+```mermaid
+classDiagram
+    class Prototype {
+        <<interface>>
+        +clone(): Prototype
+    }
+
+    class ConcretePrototype1 {
+        -data: String
+        +clone(): Prototype
+        +getData(): String
+        +setData(data: String): void
+    }
+
+    class ConcretePrototype2 {
+        -number: int
+        +clone(): Prototype
+        +getNumber(): int
+        +setNumber(number: int): void
+    }
+
+    Prototype <|-- ConcretePrototype1
+    Prototype <|-- ConcretePrototype2
+
+```
+
+### Use when
+- Creating complex objects with many attributes and dependencies can be expensive and time-consuming.
+- Some objects might need to be configured or initialized in a certain way, and copying an existing object can be more straightforward than reconfiguring it from scratch.
+
+### Example
+Rates processing engines often require the lookup of many different configuration values, making the initialization of the engine a relatively expensive process. When multiple instances of the engine is needed, say for importing data in a multi-threaded manner, the expense of initializing many engines is high. By utilizing the prototype pattern we can ensure that only a single copy of the engine has to be initialized then simply clone the engine to create a duplicate of the already initialized object. The added benefit of this is that the clones can be streamlined to only include relevant data for their situation.
+
+
+## 🚀 Builder Design Pattern
+
+### Purpose
+- The Builder Pattern is a creational design pattern used to construct complex objects step by step. It separates the construction of a complex object from its representation so that the same construction process can create different representations. This pattern is particularly useful when the object being created has multiple optional or required components, and you want to avoid a large number of constructors or factory methods.
+
+
+```mermaid
+classDiagram
+    class Director {
+        +construct(): void
+        -builder: Builder
+    }
+
+    class Builder {
+        +buildPart1(): void
+        +buildPart2(): void
+        +getResult(): Product
+    }
+
+    class ConcreteBuilder {
+        +buildPart1(): void
+        +buildPart2(): void
+        +getResult(): Product
+    }
+
+    class Product {
+        // Attributes of the product
+    }
+
+    Director --> Builder
+    Director --> ConcreteBuilder
+    Builder <|-- ConcreteBuilder
+    Builder --> Product
+```
+
+### Use when
+- When creating an object involves many steps or configurations.
+- To create immutable objects with optional parameters.
+- To construct different representations of an object with the same construction process.
+- The addition of new creation functionality without changing 
+the core code is necessary.
+- Runtime control over the creation process is required.
+
+### Example
+A file transfer application could possibly use many different 
+protocols to send files and the actual transfer object that will be created will be directly dependent on the chosen protocol. Using a builder we can determine the right builder to use to instantiate the right object. If the setting is FTP then the FTP builder would be used when creating the object. 
+
