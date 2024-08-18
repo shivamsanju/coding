@@ -323,3 +323,278 @@ classDiagram
 
 ### Example
 Many businesses set up their mail systems to take advantage of decorators. When messages are sent from someone in the company to an external address the mail server decorates the original message with copyright and confidentiality information. As long as the message remains internal the information is not attached. This decoration allows the message itself to remain unchanged until a runtime decision is made to wrap the message with additional information.
+
+## 🚀 Facade Design Pattern
+
+### Purpose
+- The Facade Pattern is a design pattern in software development that simplifies the interface for interacting with a complex system. 
+- Think of it as a "front desk" for a hotel. When you visit a hotel, you don't directly interact with the cleaning staff, kitchen, or maintenance workers. Instead, you go to the front desk, and the front desk handles everything for you. The front desk is your simple, easy-to-use interface to the hotel.
+
+```mermaid
+classDiagram
+    class Facade {
+        +operation1()
+        +operation2()
+    }
+
+    class Subsystem1 {
+        +operationA()
+    }
+
+    class Subsystem2 {
+        +operationB()
+    }
+
+    class Subsystem3 {
+        +operationC()
+    }
+
+    Facade --> Subsystem1
+    Facade --> Subsystem2
+    Facade --> Subsystem3
+
+```
+
+### Use when
+- A simple interface is needed to provide access to a complex system.
+- There are many dependencies between system implementations and clients.
+- Systems and subsystems should be layered.
+
+### Example
+By exposing a set of functionalities through a web service 
+the client code needs to only worry about the simple interface 
+being exposed to them and not the complex relationships that 
+may or may not exist behind the web service layer. A single 
+web service call to update a system with new data may actually 
+involve communication with a number of databases and systems, 
+however this detail is hidden due to the implementation of the 
+façade pattern.
+
+## 🚀 Strategy Design Pattern
+
+### Purpose
+- Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
+
+```mermaid
+classDiagram
+    class Context {
+        -Strategy strategy
+        +setStrategy(Strategy strategy)
+        +executeStrategy()
+    }
+
+    class Strategy {
+        <<interface>>
+        +execute()
+    }
+
+    class ConcreteStrategyA {
+        +execute()
+    }
+
+    class ConcreteStrategyB {
+        +execute()
+    }
+
+    class ConcreteStrategyC {
+        +execute()
+    }
+
+    Context --> Strategy : uses
+    Strategy <|.. ConcreteStrategyA
+    Strategy <|.. ConcreteStrategyB
+    Strategy <|.. ConcreteStrategyC
+
+
+```
+
+### Use when
+- When you have multiple algorithms for a specific task, and you want to choose the algorithm at runtime.
+- When you want to avoid using conditional statements (like if-else or switch-case) to select the appropriate algorithm.
+- When you have a class that performs various functions that might change in the future.
+- Algorithms access or utilize data that calling code shouldn’t be exposed to client.
+
+### Example
+- Sorting Algorithms: You might have different sorting strategies like bubble sort, merge sort, or quicksort, and you can choose the appropriate sorting strategy based on the context.
+- Compression Algorithms: A file compression program might use different compression algorithms like ZIP, RAR, or TAR, chosen dynamically at runtime.
+
+
+## 🚀 Observer Design Pattern
+
+### Purpose
+- The Observer Pattern is a behavioral design pattern that defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically. 
+- This pattern is essential for creating systems where multiple objects need to be informed about changes in another object without tightly coupling them.
+
+```mermaid
+classDiagram
+    class Subject {
+        +registerObserver(Observer)
+        +removeObserver(Observer)
+        +notifyObservers()
+    }
+
+    class ConcreteSubject {
+        -observers : List~Observer~
+        -state
+        +getState()
+        +setState(state)
+    }
+
+    class Observer {
+        <<interface>>
+        +update(state)
+    }
+
+    class ConcreteObserverA {
+        -subject : Subject
+        +update(state)
+    }
+
+    class ConcreteObserverB {
+        -subject : Subject
+        +update(state)
+    }
+
+    Subject <|-- ConcreteSubject
+    Observer <|-- ConcreteObserverA
+    Observer <|-- ConcreteObserverB
+    ConcreteSubject o-- Observer : maintains
+```
+
+### Use when
+- State changes in one or more objects should trigger behavior in other objects
+- Broadcasting capabilities are required.
+- An understanding exists that objects will be blind to the expense of notification.
+
+### Example
+- Event Handling Systems: When an object needs to notify other objects without making assumptions about who these objects are.
+- Distributed Event Systems: When changes in one part of an application need to be propagated to other parts.
+- This pattern can be found in almost every GUI environment. When buttons, text, and other fields are placed in applications the application typically registers as a listener for those controls. When a user triggers an event, such as clicking a button, the control iterates through its registered observers and sends a notification to each.
+
+
+## 🚀 State Design Pattern
+
+### Purpose
+- Ties object circumstances to its behavior, allowing the object to behave in different ways based upon its internal state. 
+
+```mermaid
+classDiagram
+    class Context {
+        -State currentState
+        +setState(State)
+        +request()
+    }
+
+    class State {
+        <<interface>>
+        +handle(Context)
+    }
+
+    class ConcreteStateA {
+        +handle(Context)
+    }
+
+    class ConcreteStateB {
+        +handle(Context)
+    }
+
+    Context --> State : uses
+    State <|.. ConcreteStateA
+    State <|.. ConcreteStateB
+
+```
+
+### Use when
+- The behavior of an object should be influenced by its state.
+- Complex conditions tie object behavior to its state.
+- Transitions between states need to be explicit.
+
+### Example
+An email object can have various states, all of which will change how the object handles different functions. If the state is “not sent” then the call to send() is going to send the message while a call to recallMessage() will either throw an error or do nothing. However, if the state is “sent” then the call to send() would either throw an error or do nothing while the call to recallMessage() would attempt to send a recall notification to recipients. To avoid conditional statements in most or all methods there would be multiple state objects that handle the implementation with respect to their particular state. The calls within the Email object would then be delegated down to the appropriate state object for handling
+
+
+
+## 🚀 Mediator Design Pattern
+
+### Purpose
+- The Mediator Pattern is a behavioral design pattern that helps reduce the complexity of communication between multiple objects or components. It does this by introducing a mediator object that handles all interactions between the different objects, so they don't have to communicate with each other directly.
+
+```mermaid
+classDiagram
+    class Mediator {
+        <<interface>>
+        +operation(colleague: Colleague)
+    }
+
+    class ConcreteMediator {
+        +operation(colleague: Colleague)
+    }
+
+    class Colleague {
+        -mediator: Mediator
+        +send()
+        +receive()
+    }
+
+    class ConcreteColleague1 {
+        +send()
+        +receive()
+    }
+
+    class ConcreteColleague2 {
+        +send()
+        +receive()
+    }
+
+    Mediator <|.. ConcreteMediator
+    ConcreteMediator -- ConcreteColleague1 : communicates
+    ConcreteMediator -- ConcreteColleague2 : communicates
+    Colleague <|-- ConcreteColleague1
+    Colleague <|-- ConcreteColleague2
+    Colleague --> Mediator : uses
+
+```
+
+### Use when
+- Without a mediator, each object would need to know about and communicate with every other object. This can get complex and hard to manage as the number of objects grows.
+- Objects (colleagues) need to be decoupled from one another, meaning they don’t need to be aware of each other. They only interact with the mediator, making the system easier to maintain and extend.
+
+### Example
+Mailing list software keeps track of who is signed up to the mailing list and provides a single point of access through which any one person can communicate with the entire list. Without a mediator implementation a person wanting to send a message tothe group would have to constantly keep track of who was signed up and who was not. By implementing the mediator pattern the system is able to receive messages from any point then determine which recipients to forward the message on to, without the sender of the message having to be concerned with the actual recipient list.
+
+## 🚀 Chain of Responsibility Design Pattern
+
+### Purpose
+- The Chain of Responsibility Pattern allows passing a request along a chain of handlers. Each handler in the chain either processes the request or passes it along to the next handler. It decouples the sender of a request from its receivers by allowing multiple objects to handle the request.
+
+```mermaid
+classDiagram
+    class Client {
+    }
+
+    class Handler {
+        +handlerrequest()
+    }
+
+    class ConcreteHandler1 {
+        +handlerrequest()
+    }
+
+    class ConcreteHandler2 {
+        +handlerrequest()
+    }
+
+    Client --> Handler
+    Handler <|-- ConcreteHandler1
+    Handler <|-- ConcreteHandler2
+    Handler --> Handler : successor
+
+```
+
+### Use when
+- You have a set of handlers where each handler can process a request or pass it to the next handler in the chain.
+- You want to avoid coupling the sender of a request to its receiver.
+- You want to add or change handlers dynamically.
+
+### Example
+Exception handling in some languages implements this pattern. When an exception is thrown in a method the runtime checks to see if the method has a mechanism to handle the exception or if it should be passed up the call stack. When passed up the call stack the process repeats until code to handle the exception is encountered or until there are no more parent objects to hand the request to.
