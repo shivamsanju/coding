@@ -234,6 +234,92 @@ the core code is necessary.
 - Runtime control over the creation process is required.
 
 ### Example
-A file transfer application could possibly use many different 
-protocols to send files and the actual transfer object that will be created will be directly dependent on the chosen protocol. Using a builder we can determine the right builder to use to instantiate the right object. If the setting is FTP then the FTP builder would be used when creating the object. 
+A file transfer application could possibly use many different protocols to send files and the actual transfer object that will be created will be directly dependent on the chosen protocol. Using a builder we can determine the right builder to use to instantiate the right object. If the setting is FTP then the FTP builder would be used when creating the object. 
 
+## 🚀 Adapter Design Pattern
+
+### Purpose
+- The Adapter Pattern is a structural design pattern that allows incompatible interfaces to work together. It acts as a bridge between two objects, converting the interface of a class into another interface that a client expects. This pattern is particularly useful when integrating existing components that are incompatible with the rest of the system.
+
+
+```mermaid
+classDiagram
+    class Target {
+        +request(): void
+    }
+
+    class Adaptee {
+        +specificRequest(): void
+    }
+
+    class Adapter {
+        +request(): void
+        -adaptee: Adaptee
+    }
+
+    class Client {
+        +target: Target
+        +execute(): void
+    }
+
+    Target <|.. Adapter
+    Adapter --> Adaptee
+    Client --> Target
+```
+
+### Use when
+- When you have existing classes or systems with interfaces that are not directly compatible with the interface your client code expects.
+- When you need to integrate legacy systems or third-party libraries into your application.
+- To reuse existing functionality without modifying the original code.
+
+### Example
+A billing application needs to interface with an HR application in order to exchange employee data, however each has its own interface and implementation for the Employee object. In addition, the SSN is stored in different formats by each system. By creating an adapter we can create a common interface between the two applications that allows them to communicate using their native objects and is able to transform the SSN format in the process.
+
+
+## 🚀 Decorator Design Pattern
+
+### Purpose
+- The Decorator Pattern is a structural design pattern that allows you to dynamically add behavior or responsibilities to objects without modifying their code. It’s an alternative to subclassing, where new functionality is added by wrapping an object within another object. 
+- It uses composition instead of inheritance.
+
+```mermaid
+classDiagram
+    class Component {
+        +operation()
+    }
+
+    class ConcreteComponent {
+        +operation()
+    }
+
+    class Decorator {
+        -Component component
+        +Decorator(Component component)
+        +operation()
+    }
+
+    class ConcreteDecoratorA {
+        +operation()
+    }
+
+    class ConcreteDecoratorB {
+        +operation()
+    }
+
+    Component <|.. ConcreteComponent
+    Component <|.. Decorator
+    Decorator <|-- ConcreteDecoratorA
+    Decorator <|-- ConcreteDecoratorB
+    Component o-- Decorator : wraps
+
+```
+
+### Use when
+- To extend the functionality of an object without altering its structure.
+- To add functionalities to a class without altering its original code, keeping the class focused on its primary responsibility.
+- To compose behaviors in a flexible and reusable way by chaining decorators.
+- Subclassing to achieve modification is impractical or impossible.
+- A lot of little objects surrounding a concrete implementation is acceptable.
+
+### Example
+Many businesses set up their mail systems to take advantage of decorators. When messages are sent from someone in the company to an external address the mail server decorates the original message with copyright and confidentiality information. As long as the message remains internal the information is not attached. This decoration allows the message itself to remain unchanged until a runtime decision is made to wrap the message with additional information.
