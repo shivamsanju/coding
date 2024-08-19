@@ -12,15 +12,6 @@ public class PercentageStrategy implements SplitStrategy {
     Double totalAmount;
 
     public PercentageStrategy(List<User> participants, List<Double> percentages, Double totalAmount) {
-        if (participants.size() != percentages.size()) {
-            throw new IllegalArgumentException("Participants and percentages lists must have the same size");
-        }
-
-        double totalPercentage = percentages.stream().mapToDouble(Double::doubleValue).sum();
-        if (totalPercentage != 1.0) {
-            throw new IllegalArgumentException("Percentages must sum to 1.0 (100%)");
-        }
-
         this.participants = participants;
         this.percentages = percentages;
         this.totalAmount = totalAmount;
@@ -31,7 +22,7 @@ public class PercentageStrategy implements SplitStrategy {
         Map<User, Double> splitsMap = new HashMap<>();
 
         for (int i = 0; i < participants.size(); i++) {
-            splitsMap.put(participants.get(i), percentages.get(i) * totalAmount);
+            splitsMap.put(participants.get(i), (percentages.get(i) * totalAmount) / 100);
         }
 
         return splitsMap;

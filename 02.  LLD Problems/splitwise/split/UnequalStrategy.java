@@ -11,9 +11,6 @@ public class UnequalStrategy implements SplitStrategy {
     List<Double> amounts;
 
     public UnequalStrategy(List<User> participants, List<Double> amounts) {
-        if (participants.size() != amounts.size()) {
-            throw new IllegalArgumentException("Participants and amounts lists must have the same size");
-        }
         this.participants = participants;
         this.amounts = amounts;
     }

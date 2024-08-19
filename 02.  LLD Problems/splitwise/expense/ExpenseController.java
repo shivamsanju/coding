@@ -20,13 +20,13 @@ public class ExpenseController {
         this.expenseEventManager = expenseEventManager;
     }
 
-    public void addExpense(AddExpenseRequest request) {
+    public Expense addExpense(AddExpenseRequest request) {
         if (request.splitType == SplitType.EQUAL) {
-            this.strategy = new EqualStrategy(request.users, request.totalAmount);
+            this.strategy = new EqualStrategy(request.participants, request.totalAmount);
         } else if (request.splitType == SplitType.UNEQUAL) {
-            this.strategy = new UnequalStrategy(request.users, request.amounts);
+            this.strategy = new UnequalStrategy(request.participants, request.amounts);
         } else {
-            this.strategy = new PercentageStrategy(request.users, request.percentages, request.totalAmount);
+            this.strategy = new PercentageStrategy(request.participants, request.percentages, request.totalAmount);
         }
         var splitsMap = strategy.split();
 
@@ -35,5 +35,6 @@ public class ExpenseController {
                 request.payee, request.totalAmount, splitsMap);
         expenses.add(newExpense);
         expenseEventManager.notify(ExpenseEvent.ADD, newExpense);
+        return newExpense;
     }
 }

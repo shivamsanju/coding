@@ -6,6 +6,8 @@ import splitwise.expense.AddExpenseRequest;
 import splitwise.expense.ExpenseController;
 import splitwise.expense.ExpenseEvent;
 import splitwise.expense.ExpenseEventManager;
+import splitwise.group.Group;
+import splitwise.group.GroupController;
 import splitwise.split.SplitType;
 import splitwise.user.User;
 import splitwise.user.UserController;
@@ -13,11 +15,13 @@ import splitwise.user.UserExpenseListener;
 
 public class Splitwise {
     UserController userController;
+    GroupController groupController;
     ExpenseController expenseController;
     ExpenseEventManager expenseEventManager;
 
     public Splitwise() {
         userController = new UserController();
+        groupController = new GroupController();
         expenseEventManager = ExpenseEventManager.getExpenseEventManager();
         expenseEventManager.addListener(ExpenseEvent.ADD, new UserExpenseListener());
         expenseController = new ExpenseController(expenseEventManager);
@@ -56,6 +60,16 @@ public class Splitwise {
         AddExpenseRequest expense2 = new AddExpenseRequest(SplitType.UNEQUAL, 200.0, user2, "Expense 2",
                 "Description 2", participants2, null, amounts);
         expenseController.addExpense(expense2);
+
+        // Adding expense in a group
+        List<User> members = List.of(user1, user3, user4);
+        groupController.createGroup("G1", "Bike Trip", members);
+        Group g1 = groupController.getGroup("G1");
+
+        List<Double> percentages = List.of(20.0, 30.0, 50.0);
+        AddExpenseRequest expense3 = new AddExpenseRequest(SplitType.PERCENTAGE, 500.0, user4, "Expense 3",
+                "Description 3", members, percentages, null);
+        g1.addExpense(expense3);
 
         displayBalanceSheet(user1);
         displayBalanceSheet(user2);
