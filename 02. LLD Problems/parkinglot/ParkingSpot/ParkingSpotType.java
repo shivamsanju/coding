@@ -1,4 +1,4 @@
-package parkinglot;
+package parkinglot.ParkingSpot;
 
 public enum ParkingSpotType {
     COMPACT,

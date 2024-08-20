@@ -1,4 +1,4 @@
-package parkinglot;
+package parkinglot.Vehicle;
 
 public class Vehicle {
     private String registrationNumber;

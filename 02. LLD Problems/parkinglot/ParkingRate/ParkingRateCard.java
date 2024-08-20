@@ -1,25 +1,11 @@
-package parkinglot;
+package parkinglot.ParkingRate;
 
-import java.util.HashMap;
-import java.util.Map;
+import parkinglot.ParkingSpot.ParkingSpotType;
 
-public class ParkingRate {
-    final private Map<ParkingRateType, Map<ParkingSpotType, Double>> rates;
+public interface ParkingRateCard {
+    public Double getRate(ParkingSpotType parkingSpotType);
 
-    public ParkingRate() {
-        this.rates = new HashMap<>();
-        for (ParkingRateType rateType : ParkingRateType.values()) {
-            rates.put(rateType, new HashMap<>());
-        }
-    }
+    public void setRate(ParkingSpotType parkingSpotType, Double rate);
 
-    public Double getRate(ParkingRateType parkingRateType, ParkingSpotType parkingSpotType) {
-        return rates.get(parkingRateType).get(parkingSpotType);
-    }
-
-    public void setRate(ParkingRateType parkingRateType, ParkingSpotType parkingSpotType, Double rate) {
-        Map<ParkingSpotType, Double> ratesMap = rates.get(parkingRateType);
-        ratesMap.put(parkingSpotType, rate);
-    }
-
+    ;
 }

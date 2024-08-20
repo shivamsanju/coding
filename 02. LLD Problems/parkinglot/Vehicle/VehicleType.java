@@ -1,4 +1,4 @@
-package parkinglot;
+package parkinglot.Vehicle;
 
 public enum VehicleType {
     TWO_WHEELER,

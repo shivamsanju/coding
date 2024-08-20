@@ -1,4 +1,6 @@
-package parkinglot;
+package parkinglot.ParkingSpot;
+
+import parkinglot.Vehicle.Vehicle;
 
 public class ParkingSpot {
     final private int id;
@@ -25,13 +27,11 @@ public class ParkingSpot {
         return isAvailable;
     }
 
-    public synchronized boolean assignSpot(Vehicle vehicle) {
+    public synchronized void assignSpot(Vehicle vehicle) {
         if (this.isAvailable) {
             this.isAvailable = false;
             this.parkedVehicle = vehicle;
-            return true;
         }
-        return false;
     }
 
     public synchronized void releaseSpot() {

@@ -1,43 +1,37 @@
 package parkinglot;
 
 import parkinglot.ParkingSpot.ParkingSpot;
-import parkinglot.ParkingSpot.ParkingSpotType;
+import parkinglot.ParkingSpot.ParkingSpotController;
 import parkinglot.Vehicle.Vehicle;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+public class BookingService {
+    final private ParkingSpotController parkingSpotController;
+    final private PaymentService paymentService;
 
-public class ParkingLotService {
-    final private Map<ParkingSpotType, List<ParkingSpot>> parkingSpots;
-    PaymentService paymentService;
-
-    public ParkingLotService() {
+    public BookingService(ParkingSpotController parkingSpotController) {
         paymentService = new PaymentService();
-        parkingSpots = new HashMap<>();
-        for (ParkingSpotType parkingSpotType : ParkingSpotType.values()) {
-            parkingSpots.put(parkingSpotType, new ArrayList<>());
-        }
+        this.parkingSpotController = parkingSpotController;
     }
 
-    public Ticket generateParkingTicket(ParkingSpot parkingSpot, Vehicle vehicle) {
+    private Ticket generateParkingTicket(ParkingSpot parkingSpot, Vehicle vehicle) {
         return new Ticket(parkingSpot, vehicle);
     }
 
-    public Ticket assignParkingSpot(ParkingSpotType parkingSpotType, Vehicle vehicle) throws ParkingFullException {
-        List<ParkingSpot> spotsOfType = parkingSpots.get(parkingSpotType);
-        for (ParkingSpot spot : spotsOfType) {
-            if (spot.isAvailable()) {
-                spot.assignSpot(vehicle);
-                return generateParkingTicket(spot, vehicle);
-            }
+    public Ticket assignParkingSpot(Vehicle vehicle) {
+        ParkingSpot freeSpot = parkingSpotController.getNextFreeSpot(vehicle);
+        if (freeSpot == null) {
+            return null;
         }
-        throw new ParkingFullException();
+        freeSpot.assignSpot(vehicle);
+        return generateParkingTicket(freeSpot, vehicle);
     }
 
-    public void unParkVehicle(Ticket ticket) {
+    public void checkout(Ticket ticket) {
         paymentService.processPayment(ticket);
         ticket.getParkingSpot().releaseSpot();
+    }
+
+    public Double getTotalCollection() {
+        return paymentService.getTotalCollection();
     }
 }
