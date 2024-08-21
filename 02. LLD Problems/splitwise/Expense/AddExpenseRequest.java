@@ -1,9 +1,9 @@
-package splitwise.expense;
+package splitwise.Expense;
+
+import splitwise.Split.SplitType;
+import splitwise.User.User;
 
 import java.util.List;
-
-import splitwise.split.SplitType;
-import splitwise.user.User;
 
 public class AddExpenseRequest {
     SplitType splitType;
@@ -17,7 +17,7 @@ public class AddExpenseRequest {
 
     // Can use method overloading for each split type
     public AddExpenseRequest(SplitType splitType, Double totalAmount, User payee, String name,
-            String description, List<User> participants, List<Double> percentages, List<Double> amounts) {
+                             String description, List<User> participants, List<Double> percentages, List<Double> amounts) {
 
         if (splitType == SplitType.UNEQUAL) {
             if (participants.size() != amounts.size()) {

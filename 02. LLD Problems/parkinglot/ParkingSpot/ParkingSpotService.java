@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ParkingSpotController {
+public class ParkingSpotService {
     final private Map<ParkingSpotType, List<ParkingSpot>> parkingSpots;
 
-    public ParkingSpotController() {
+    public ParkingSpotService() {
         this.parkingSpots = new HashMap<>();
         for (ParkingSpotType parkingSpotType : ParkingSpotType.values()) {
             parkingSpots.put(parkingSpotType, new ArrayList<>());

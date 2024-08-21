@@ -1,17 +1,17 @@
 package splitwise;
 
-import java.util.List;
+import splitwise.Expense.AddExpenseRequest;
+import splitwise.Expense.ExpenseController;
+import splitwise.Expense.ExpenseEvent;
+import splitwise.Expense.ExpenseEventManager;
+import splitwise.Group.Group;
+import splitwise.Group.GroupController;
+import splitwise.Split.SplitType;
+import splitwise.User.User;
+import splitwise.User.UserController;
+import splitwise.User.UserExpenseListener;
 
-import splitwise.expense.AddExpenseRequest;
-import splitwise.expense.ExpenseController;
-import splitwise.expense.ExpenseEvent;
-import splitwise.expense.ExpenseEventManager;
-import splitwise.group.Group;
-import splitwise.group.GroupController;
-import splitwise.split.SplitType;
-import splitwise.user.User;
-import splitwise.user.UserController;
-import splitwise.user.UserExpenseListener;
+import java.util.List;
 
 public class Splitwise {
     UserController userController;

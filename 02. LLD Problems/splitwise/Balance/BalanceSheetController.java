@@ -1,4 +1,4 @@
-package splitwise.balance;
+package splitwise.Balance;
 
 import java.util.List;
 

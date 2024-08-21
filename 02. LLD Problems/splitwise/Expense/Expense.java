@@ -1,8 +1,8 @@
-package splitwise.expense;
+package splitwise.Expense;
+
+import splitwise.User.User;
 
 import java.util.Map;
-
-import splitwise.user.User;
 
 public class Expense {
     String id;
@@ -13,7 +13,7 @@ public class Expense {
     Map<User, Double> split;
 
     public Expense(String id, String name, String description, User payee, double totalAmount,
-            Map<User, Double> split) {
+                   Map<User, Double> split) {
         this.id = id;
         this.name = name;
         this.description = description;

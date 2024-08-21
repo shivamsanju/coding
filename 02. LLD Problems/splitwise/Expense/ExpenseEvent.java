@@ -1,4 +1,4 @@
-package splitwise.expense;
+package splitwise.Expense;
 
 public enum ExpenseEvent {
     ADD,

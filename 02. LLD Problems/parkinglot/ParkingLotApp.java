@@ -2,19 +2,19 @@ package parkinglot;
 
 import parkinglot.ParkingRate.HourlyRateCard;
 import parkinglot.ParkingRate.ParkingRateCard;
-import parkinglot.ParkingSpot.ParkingSpotController;
+import parkinglot.ParkingSpot.ParkingSpotService;
 import parkinglot.ParkingSpot.ParkingSpotType;
 import parkinglot.Vehicle.Vehicle;
 import parkinglot.Vehicle.VehicleType;
 
 public class ParkingLotApp {
     final private BookingService bookingService;
-    final private ParkingSpotController parkingSpotController;
+    final private ParkingSpotService parkingSpotService;
     final private ParkingRateCard parkingRateCard;
 
     public ParkingLotApp() {
-        this.parkingSpotController = new ParkingSpotController();
-        this.bookingService = new BookingService(parkingSpotController);
+        this.parkingSpotService = new ParkingSpotService();
+        this.bookingService = new BookingService(parkingSpotService);
         this.parkingRateCard = HourlyRateCard.getRateCard();
     }
 
@@ -26,13 +26,13 @@ public class ParkingLotApp {
 
     private void addParkingSpots() {
         for (int i = 1; i < 21; i++) {
-            parkingSpotController.addParkingSpot(i, ParkingSpotType.COMPACT);
+            parkingSpotService.addParkingSpot(i, ParkingSpotType.COMPACT);
         }
         for (int i = 21; i < 41; i++) {
-            parkingSpotController.addParkingSpot(i, ParkingSpotType.STANDARD);
+            parkingSpotService.addParkingSpot(i, ParkingSpotType.STANDARD);
         }
         for (int i = 41; i < 51; i++) {
-            parkingSpotController.addParkingSpot(i, ParkingSpotType.LARGE);
+            parkingSpotService.addParkingSpot(i, ParkingSpotType.LARGE);
         }
     }
 

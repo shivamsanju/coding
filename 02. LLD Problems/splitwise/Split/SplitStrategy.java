@@ -1,8 +1,8 @@
-package splitwise.split;
+package splitwise.Split;
+
+import splitwise.User.User;
 
 import java.util.Map;
-
-import splitwise.user.User;
 
 public interface SplitStrategy {
     public Map<User, Double> split();

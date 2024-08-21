@@ -1,4 +1,4 @@
-package splitwise.split;
+package splitwise.Split;
 
 public enum SplitType {
     EQUAL,

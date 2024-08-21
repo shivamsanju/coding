@@ -1,16 +1,16 @@
 package parkinglot;
 
 import parkinglot.ParkingSpot.ParkingSpot;
-import parkinglot.ParkingSpot.ParkingSpotController;
+import parkinglot.ParkingSpot.ParkingSpotService;
 import parkinglot.Vehicle.Vehicle;
 
 public class BookingService {
-    final private ParkingSpotController parkingSpotController;
+    final private ParkingSpotService parkingSpotService;
     final private PaymentService paymentService;
 
-    public BookingService(ParkingSpotController parkingSpotController) {
+    public BookingService(ParkingSpotService parkingSpotService) {
         paymentService = new PaymentService();
-        this.parkingSpotController = parkingSpotController;
+        this.parkingSpotService = parkingSpotService;
     }
 
     private Ticket generateParkingTicket(ParkingSpot parkingSpot, Vehicle vehicle) {
@@ -18,7 +18,7 @@ public class BookingService {
     }
 
     public Ticket assignParkingSpot(Vehicle vehicle) {
-        ParkingSpot freeSpot = parkingSpotController.getNextFreeSpot(vehicle);
+        ParkingSpot freeSpot = parkingSpotService.getNextFreeSpot(vehicle);
         if (freeSpot == null) {
             return null;
         }

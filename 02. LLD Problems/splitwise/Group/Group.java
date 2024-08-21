@@ -1,13 +1,13 @@
-package splitwise.group;
+package splitwise.Group;
+
+import splitwise.Expense.AddExpenseRequest;
+import splitwise.Expense.Expense;
+import splitwise.Expense.ExpenseController;
+import splitwise.Expense.ExpenseEventManager;
+import splitwise.User.User;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import splitwise.expense.AddExpenseRequest;
-import splitwise.expense.Expense;
-import splitwise.expense.ExpenseController;
-import splitwise.expense.ExpenseEventManager;
-import splitwise.user.User;
 
 public class Group {
     String id;

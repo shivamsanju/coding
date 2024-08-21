@@ -1,9 +1,9 @@
-package splitwise.balance;
+package splitwise.Balance;
+
+import splitwise.User.User;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import splitwise.user.User;
 
 public class BalanceSheet {
 

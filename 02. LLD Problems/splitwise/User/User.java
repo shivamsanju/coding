@@ -1,6 +1,6 @@
-package splitwise.user;
+package splitwise.User;
 
-import splitwise.balance.BalanceSheet;
+import splitwise.Balance.BalanceSheet;
 
 public class User {
     String id;

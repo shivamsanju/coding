@@ -1,10 +1,10 @@
-package splitwise.user;
+package splitwise.User;
+
+import splitwise.Expense.Expense;
+import splitwise.Expense.ExpenseEvent;
+import splitwise.Expense.ExpenseListener;
 
 import java.util.Map;
-
-import splitwise.expense.Expense;
-import splitwise.expense.ExpenseEvent;
-import splitwise.expense.ExpenseListener;
 
 public class UserExpenseListener implements ExpenseListener {
     @Override

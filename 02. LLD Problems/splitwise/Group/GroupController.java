@@ -1,9 +1,9 @@
-package splitwise.group;
+package splitwise.Group;
+
+import splitwise.User.User;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import splitwise.user.User;
 
 public class GroupController {
     List<Group> groups;

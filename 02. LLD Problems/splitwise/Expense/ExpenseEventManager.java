@@ -1,4 +1,4 @@
-package splitwise.expense;
+package splitwise.Expense;
 
 import java.util.ArrayList;
 import java.util.HashMap;

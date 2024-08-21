@@ -1,10 +1,10 @@
-package splitwise.split;
+package splitwise.Split;
+
+import splitwise.User.User;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import splitwise.user.User;
 
 public class UnequalStrategy implements SplitStrategy {
     List<User> participants;

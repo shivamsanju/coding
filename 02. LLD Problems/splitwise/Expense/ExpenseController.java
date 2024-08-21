@@ -1,14 +1,10 @@
-package splitwise.expense;
+package splitwise.Expense;
+
+import splitwise.Split.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import splitwise.split.EqualStrategy;
-import splitwise.split.PercentageStrategy;
-import splitwise.split.SplitStrategy;
-import splitwise.split.SplitType;
-import splitwise.split.UnequalStrategy;
 
 public class ExpenseController {
     SplitStrategy strategy;

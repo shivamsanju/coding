@@ -1,4 +1,4 @@
-package splitwise.user;
+package splitwise.User;
 
 import java.util.ArrayList;
 

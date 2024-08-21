@@ -1,4 +1,4 @@
-package splitwise.balance;
+package splitwise.Balance;
 
 public class Balance {
     double amountDue;
@@ -13,16 +13,16 @@ public class Balance {
         return amountDue;
     }
 
+    public void setAmountDue(double amountDue) {
+        this.amountDue = amountDue;
+    }
+
     public double getAmountOwed() {
         return amountOwed;
     }
 
     public void setAmountOwed(double amountOwed) {
         this.amountOwed = amountOwed;
-    }
-
-    public void setAmountDue(double amountDue) {
-        this.amountDue = amountDue;
     }
 
 }
