@@ -1,6 +1,6 @@
-package Test;
+package test;
 
-import Deque.Deque;
+import deque.Deque;
 
 public class DequeTest {
     public static void main(String[] args) {

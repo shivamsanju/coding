@@ -1,4 +1,4 @@
-package DynamicArray;
+package dynamicarray;
 
 public class ArrayList {
     private int[] array;

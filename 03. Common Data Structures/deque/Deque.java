@@ -1,4 +1,4 @@
-package Deque;
+package deque;
 
 public class Deque<E> {
     int head;

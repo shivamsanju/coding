@@ -12,12 +12,12 @@ classDiagram
     Collection <|-- List
     Collection <|-- Set
     Collection <|-- Queue
-    List <|-- DynamicArray
-    List <|-- LinkedList
+    List <|-- dynamicarray
+    List <|-- linkedlist
     Set <|-- HashSet
     Set <|-- TreeSet
     Queue <|-- PriorityQueue
-    Queue <|-- LinkedList
+    Queue <|-- linkedlist
 
     class Collection {
         <<interface>>
@@ -59,23 +59,23 @@ classDiagram
         +peek() E
     }
 
-    class DynamicArray {
+    class dynamicarray {
         +size: int
         +modCount: int
-        +DynamicArray() 
-        +DynamicArray(int initialCapacity) 
-        +DynamicArray(Collection c)
+        +dynamicarray() 
+        +dynamicarray(int initialCapacity) 
+        +dynamicarray(Collection c)
         +ensureCapacity(int minCapacity) void
         +trimToSize() void
         +removeRange(int fromIndex, int toIndex) void
     }
 
-    class LinkedList {
+    class linkedlist {
         +size: int
         +first: Node
         +last: Node
-        +LinkedList()
-        +LinkedList(Collection c)
+        +linkedlist()
+        +linkedlist(Collection c)
         +addFirst(E e) void
         +addLast(E e) void
         +getFirst() E
@@ -124,7 +124,7 @@ classDiagram
 ### UML diagram of Map Interface
 ``` mermaid
 classDiagram
-    Map <|-- HashMap
+    Map <|-- hashmap
     Map <|-- TreeMap
     Map <|-- LinkedHashMap
     Map <|-- Hashtable
@@ -154,11 +154,11 @@ classDiagram
         +int hashCode()
     }
 
-    class HashMap {
-        +HashMap()
-        +HashMap(int initialCapacity)
-        +HashMap(int initialCapacity, float loadFactor)
-        +HashMap(Map<? extends K, ? extends V> m)
+    class hashmap {
+        +hashmap()
+        +hashmap(int initialCapacity)
+        +hashmap(int initialCapacity, float loadFactor)
+        +hashmap(Map<? extends K, ? extends V> m)
         +V put(K key, V value)
         +V get(Object key)
         +V remove(Object key)
@@ -224,8 +224,8 @@ classDiagram
 ### 2. **List Interface**
 - **Description:** Represents an ordered collection (also known as a sequence). Lists can contain duplicate elements.
 - **Key Implementations:**
-    - `DynamicArray`
-    - `LinkedList`
+    - `dynamicarray`
+    - `linkedlist`
     - `Vector`
     - `Stack`
 - **Key Methods:**
@@ -251,7 +251,7 @@ classDiagram
 - **Description:** Represents a collection used to hold multiple elements prior to processing, typically in a FIFO (First-In-First-Out) manner.
 - **Key Implementations:**
     - `PriorityQueue`
-    - `LinkedList` (implements both `List` and `Queue`)
+    - `linkedlist` (implements both `List` and `Queue`)
 - **Key Methods:**
     - `boolean offer(E e)`
     - `E poll()`
@@ -260,7 +260,7 @@ classDiagram
 ### 5. **Map Interface**
 - **Description:** Represents a collection of key-value pairs, where each key is mapped to a single value. Maps cannot contain duplicate keys.
 - **Key Implementations:**
-    - `HashMap`
+    - `hashmap`
     - `TreeMap`
     - `LinkedHashMap`
     - `Hashtable`
@@ -277,43 +277,43 @@ classDiagram
 
 ## Collection Implementations
 
-## 1. `DynamicArray`
+## 1. `dynamicarray`
 - **Description:** A resizable array implementation of the `List` interface.
 - **Characteristics:**
   - Allows random access via index.
   - Fast iteration and random access.
-  - Slower insertion/removal operations compared to `LinkedList`.
+  - Slower insertion/removal operations compared to `linkedlist`.
 - **Constructors:**
-  - `DynamicArray()`
-  - `DynamicArray(int initialCapacity)`
-  - `DynamicArray(Collection<? extends E> c)`
+  - `dynamicarray()`
+  - `dynamicarray(int initialCapacity)`
+  - `dynamicarray(Collection<? extends E> c)`
 - **Use When:** You need a dynamic array that supports efficient random access.
 - **Why:** Provides fast read operations and better cache locality.
 
-## 2. `LinkedList`
-- **Description:** A doubly-linked list implementation of the `List` and `Deque` interfaces.
+## 2. `linkedlist`
+- **Description:** A doubly-linked list implementation of the `List` and `deque` interfaces.
 - **Characteristics:**
   - Efficient insertions and deletions at both ends.
   - No efficient random access.
   - Supports queue and stack operations.
 - **Constructors:**
-  - `LinkedList()`
-  - `LinkedList(Collection<? extends E> c)`
+  - `linkedlist()`
+  - `linkedlist(Collection<? extends E> c)`
 - **Use When:** You need a list with frequent insertions and deletions.
-- **Why:** Better performance for adding/removing elements compared to `DynamicArray`.
+- **Why:** Better performance for adding/removing elements compared to `dynamicarray`.
 
 ## 3. `Vector`
 - **Description:** A synchronized resizable array implementation of the `List` interface.
 - **Characteristics:**
   - Thread-safe due to synchronized methods.
-  - Generally slower than `DynamicArray` due to synchronization.
+  - Generally slower than `dynamicarray` due to synchronization.
 - **Constructors:**
   - `Vector()`
   - `Vector(int initialCapacity)`
   - `Vector(int initialCapacity, int capacityIncrement)`
   - `Vector(Collection<? extends E> c)`
 - **Use When:** You need a thread-safe dynamic array.
-- **Why:** Provides synchronized methods, but `DynamicArray` with explicit synchronization is preferred.
+- **Why:** Provides synchronized methods, but `dynamicarray` with explicit synchronization is preferred.
 
 ## 4. `Stack`
 - **Description:** A last-in, first-out (LIFO) stack implementation of the `List` interface.
@@ -374,16 +374,16 @@ classDiagram
 - **Use When:** You need a sorted set with log(n) time complexity for basic operations.
 - **Why:** Automatically sorts elements and supports range view operations.
 
-## 8. `HashMap`
+## 8. `hashmap`
 - **Description:** A map implementation that uses a hash table for storage.
 - **Characteristics:**
   - Key-value pairs with no guaranteed order.
   - Fast performance for basic operations due to hashing.
 - **Constructors:**
-  - `HashMap()`
-  - `HashMap(int initialCapacity)`
-  - `HashMap(int initialCapacity, float loadFactor)`
-  - `HashMap(Map<? extends K, ? extends V> m)`
+  - `hashmap()`
+  - `hashmap(int initialCapacity)`
+  - `hashmap(int initialCapacity, float loadFactor)`
+  - `hashmap(Map<? extends K, ? extends V> m)`
 - **Use When:** You need a map with fast key-value operations and no ordering.
 - **Why:** Provides constant-time performance for basic operations.
 
@@ -456,15 +456,15 @@ classDiagram
 - **Why:** Provides efficient retrieval of elements based on their priority.
 
 ## 14. `ArrayDeque`
-- **Description:** A resizable array implementation of the `Deque` interface.
+- **Description:** A resizable array implementation of the `deque` interface.
 - **Characteristics:**
   - Supports FIFO (first-in, first-out) and LIFO (last-in, first-out) operations.
-  - Generally faster than `LinkedList` for stack and queue operations.
+  - Generally faster than `linkedlist` for stack and queue operations.
 - **Constructors:**
   - `ArrayDeque()`
   - `ArrayDeque(Collection<? extends E> c)`
 - **Use When:** You need a resizable array for implementing queues and stacks.
-- **Why:** Offers better performance for queue and stack operations compared to `LinkedList`.
+- **Why:** Offers better performance for queue and stack operations compared to `linkedlist`.
 
 ## 15. `EnumSet`
 - **Description:** A specialized set implementation for use with enum types.
@@ -491,7 +491,7 @@ classDiagram
   - `EnumMap(EnumMap<K, ? extends V> m)`
   - `EnumMap(Map<? extends K, ? extends V> m)`
 - **Use When:** You need a map optimized for enum keys.
-- **Why:** Provides better performance and space efficiency for enum keys compared to `HashMap`.
+- **Why:** Provides better performance and space efficiency for enum keys compared to `hashmap`.
 
 
 

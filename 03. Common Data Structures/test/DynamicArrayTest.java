@@ -1,6 +1,6 @@
-package Test;
+package test;
 
-import DynamicArray.ArrayList;
+import dynamicarray.ArrayList;
 
 public class DynamicArrayTest {
     public static void main(String[] args) {

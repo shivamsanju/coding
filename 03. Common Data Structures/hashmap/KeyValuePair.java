@@ -1,4 +1,4 @@
-package HashMap;
+package hashmap;
 
 public class KeyValuePair<K, V> {
     public K key;

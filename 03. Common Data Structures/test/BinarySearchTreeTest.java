@@ -1,7 +1,7 @@
-package Test;
+package test;
 
-import BinarySearchTree.BinarySearchTree;
-import BinarySearchTree.TreeNode;
+import binarysearchtree.BinarySearchTree;
+import binarysearchtree.TreeNode;
 
 public class BinarySearchTreeTest {
     public static void main(String[] args) {

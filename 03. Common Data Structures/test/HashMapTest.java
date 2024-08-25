@@ -1,7 +1,7 @@
-package Test;
+package test;
 
-import HashMap.HashMap;
-import HashMap.KeyValuePair;
+import hashmap.HashMap;
+import hashmap.KeyValuePair;
 
 public class HashMapTest {
     public static void main(String[] args) {
