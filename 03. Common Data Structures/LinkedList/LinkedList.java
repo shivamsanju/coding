@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class LinkedList {
     Node head;
     Node tail;
+    int size;
 
     public LinkedList() {
 
     }
 
     public int get(int index) {
+        if(index > size) throw new IndexOutOfBoundsException();
         Node node = head;
         for (int i = 0; i < index; i++) {
             node = node.next;
@@ -28,6 +30,7 @@ public class LinkedList {
             head = node;
             tail = head;
         }
+        size++;
 
     }
 
@@ -35,15 +38,18 @@ public class LinkedList {
         Node node = new Node(val);
         tail.next = node;
         tail = node;
+        size++;
     }
 
     public boolean remove(int index) {
+        if(index > size) return false;
         Node node = head;
         for (int i = 0; i < index - 1; i++) {
             node = node.next;
         }
         if (node.next != null) {
             node.next = node.next.next;
+            size--;
             return true;
         }
         return false;
