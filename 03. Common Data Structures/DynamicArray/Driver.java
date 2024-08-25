@@ -3,7 +3,7 @@ package DynamicArray;
 public class Driver {
     public static void main(String[] args) {
         // Create a DynamicArray with initial capacity 3
-        DynamicArray dynamicArray = new DynamicArray(3);
+        ArrayList dynamicArray = new ArrayList(3);
 
         // Test push method
         dynamicArray.push(10);

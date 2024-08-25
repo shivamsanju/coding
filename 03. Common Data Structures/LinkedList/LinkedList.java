@@ -2,16 +2,6 @@ package LinkedList;
 
 import java.util.ArrayList;
 
-class Node {
-    int value;
-    Node next;
-
-    public Node(int value) {
-        this.value = value;
-    }
-
-}
-
 public class LinkedList {
     Node head;
     Node tail;

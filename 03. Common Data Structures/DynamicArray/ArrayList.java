@@ -1,11 +1,11 @@
 package DynamicArray;
 
-public class DynamicArray {
+public class ArrayList {
     private int[] array;
     public int size;
     public int capacity;
 
-    public DynamicArray(int capacity) {
+    public ArrayList(int capacity) {
         array = new int[capacity];
         size = 0;
         this.capacity = capacity;
