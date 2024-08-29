@@ -14,6 +14,7 @@ public class TestClient {
         long[] selectionSortTimes = new long[NUM_ARRAYS];
         long[] mergeSortTimes = new long[NUM_ARRAYS];
         long[] heapSortTimes = new long[NUM_ARRAYS];
+        long[] stockSortTimes = new long[NUM_ARRAYS];
 
         // Run sorting algorithms on 100 arrays
         for (int i = 0; i < NUM_ARRAYS; i++) {
@@ -60,6 +61,13 @@ public class TestClient {
             HeapSort.sort(arrForHeapSort);
             endTime = System.nanoTime();
             heapSortTimes[i] = endTime - startTime;
+
+            // Stock Sort
+            int[] arrForStockSort = Arrays.copyOf(arr, arr.length);
+            startTime = System.nanoTime();
+            Arrays.sort(arrForStockSort);
+            endTime = System.nanoTime();
+            stockSortTimes[i] = endTime - startTime;
         }
 
         // Calculate total and average times
@@ -68,6 +76,7 @@ public class TestClient {
         printPerformance("Insertion Sort", insertionSortTimes);
         printPerformance("Merge Sort", mergeSortTimes);
         printPerformance("Heap Sort", heapSortTimes);
+        printPerformance("Stock Sort", stockSortTimes);
     }
 
     private static void printPerformance(String label, long[] times) {
